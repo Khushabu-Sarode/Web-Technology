@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Time Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            text-align: center;
+            width: 700px;
+        }
+
+        th, td {
+            border: 2px solid black;
+            padding: 12px;
+        }
+
+        th {
+            background-color: lightblue;
+        }
+
+        .office {
+            background-color: beige;
+        }
+
+        .meeting {
+            background-color: lightblue;
+        }
+
+        .mat {
+            background-color: lightgreen;
+        }
+
+        .csc {
+            background-color: plum;
+        }
+    </style>
+</head>
+<body>
+    <h2>Weekly Time Table</h2>
+
+    <table>
+        <tr>
+            <th>Time</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+        </tr>
+
+        <tr>
+            <td>1:00</td>
+            <td class="office" rowspan="2">Office</td>
+            <td></td>
+            <td class="office" rowspan="2">Office</td>
+            <td rowspan="8" class="office">Office Hours<br>by Appt</td>
+            <td class="office" rowspan="2">Office</td>
+        </tr>
+
+        <tr>
+            <td>1:30</td>
+            <td class="meeting" rowspan="2">Dept Meeting</td>
+        </tr>
+
+        <tr>
+            <td>2:00</td>
+            <td class="mat" rowspan="3">MAT 108</td>
+            <td class="mat" rowspan="3">MAT 108</td>
+            <td class="mat" rowspan="3">MAT 108</td>
+        </tr>
+
+        <tr>
+            <td>2:30</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>3:00</td>
+            <td class="meeting" rowspan="2">EC Meeting</td>
+        </tr>
+
+        <tr>
+            <td>3:30</td>
+            <td class="csc" rowspan="3">CSC 205</td>
+            <td class="csc" rowspan="3">CSC 205</td>
+            <td class="csc" rowspan="3">CSC 205</td>
+        </tr>
+
+        <tr>
+            <td>4:00</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>4:30</td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+</html>
