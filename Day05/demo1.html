@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>College Canteen</h3>
+    <br>
+    <button onclick="order()">Start Alerts</button>
+
+    <button>Stop Alerts</button>
+    <h1 id = "demo"></h1>
+    <h2 id = "demo2"></h2>
+    <script>
+        function order(){
+
+            const intervals = setInterval(preparing,1000);
+            function preparing(){
+                document.getElementById("demo").innerHTML = "wait, your order is preparing !!";
+            }
+            
+            const interval2 = setTimeout(prepare, 6000);
+            
+            
+            // const mytimeout = setTimeout(prepare,6000);
+            
+            function prepare(){
+                clearInterval(intervals);
+                
+                document.getElementById("demo").innerHTML = "Your order is ready! please collect it. ";
+            }
+            
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    
+
+    <div>
+        <center>
+
+            <button onclick="btn()">
+                view products
+            </button>
+            <div id="mydiv" style="display:flex; flex-wrap: wrap; width: 80%; justify-content: space-around;">
+                
+            </div>
+        </center>
+
+    </div>
+    
+
+    <script>
+         function btn(){
+        
+
+             var helper = new XMLHttpRequest();
+             helper.onreadystatechange = () => {
+                 if(helper.readyState == 4 && helper.status == 200){
+                var replyfromserver = JSON.parse(helper.responseText);
+                var allproducts = replyfromserver.products;
+                var reftodiv = document.getElementById("mydiv");
+                
+                for(i=0;i<allproducts.length;i++){
+                    var product = allproducts[i];
+                    var productid = `
+                                 <div>
+                                    <h2> ${product.title} </h2> 
+                                    <h4> ${product.price} </h2>
+                                    <img  src = "${product.thumbnail} " height = "200px" width = "200px" /> 
+                                    <hr/>
+                                </div>
+                                        ` 
+
+                  reftodiv.innerHTML = reftodiv.innerHTML + productid;
+                }
+            }
+
+         };
+         helper.open("GET" , "https://dummyjson.com/products");
+         helper.send();
+        }
+    </script>
+
+</body>
+</html>
