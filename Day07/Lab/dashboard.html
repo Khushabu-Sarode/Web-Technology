@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <script src="bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+           <img src="OIP.webp" alt="" class="img-fluid " style="height: 70px; width: 70px;">
+      <hr/>
+      <a href="home.html"> Home</a> | <a href="dashboard.html">Dashboard</a> | <a href="about.html">About Us</a>
+ 
+      <hr>
+
+      <h3 id="labelusername">
+      </h3> 
+      <button class="btn btn-primary" onclick="logout()"> logout </button>
+
+      <hr>
+      <div class="alert alert-warning" style="margin-top: 20px;">
+        <h3 id="countLabel">Total Item purchased : 0 </h3>
+        <button class = "btn btn-primary" onclick="checkout()">checkOut</button>
+      </div>
+      <div class="row" id="productContainerDiv"></div>
+    </div>
+
+    <script>
+      var isLoggedIn = sessionStorage.getItem("isLoggedIn")
+      if(isLoggedIn == null || isLoggedIn == "false"){
+        window.location.href = "login.html";
+      }else{
+        var useName = sessionStorage.getItem("userName");
+        var refTouseranamelabel = document.getElementById("labelusername");
+        refTouseranamelabel.innerHTML = `Welcome ${username}`;
+      }
+      function logout(){
+        sessionStorage.removeItem("isLoggedIn");
+        sessionStorage.removeItem("userName");
+        window.location.href = "login.html";
+      }
+    </script>
+
+    <script>
+      function GetProducts() {
+        var helper = new XMLHttpRequest();
+        helper.onreadystatechange = () => {
+          if (helper.readyState == 4 && helper.status == 200) {
+            var replyFromServer = JSON.parse(helper.responseText);
+            //console.log(replyFromServer.products);
+            var products = replyFromServer.products;
+            var refToProductContainerDiv = document.getElementById(
+              "productContainerDiv",
+            );
+
+            for (i = 0; i < products.length; i++) {
+              var product = products[i];
+
+              var productUI = `<div id="${product.id}" class="col-md-4">
+          <img
+            class="img-fluid"
+            src="${product.thumbnail}"
+            alt="${product.title}"
+          />
+          <hr />
+          <h3>${product.title}</h3>
+          <h4>Price : ${product.price} INR</h4>
+
+          <button class="btn btn-primary" 
+                  onclick="AddToCart(${product.id}, 
+                                    '${product.title}', 
+                                     ${product.price})">Add To Cart
+          </button>
+       
+        </div>`;
+
+              refToProductContainerDiv.innerHTML =
+                refToProductContainerDiv.innerHTML + productUI;
+            }
+          }
+        };
+        helper.open("GET", "https://dummyjson.com/products");
+        helper.send();
+      }
+
+      var productsPurchased = new Array();
+
+      function AddToCart(id, title, price) {
+        // console.log("U purchased");
+        // console.log(`${id} | ${title} | ${price}`);
+        productsPurchased.push({ id: id, title: title, price: price });
+
+        var productsPurchasedInStringForm = JSON.stringify(productsPurchased);
+
+        console.log(productsPurchasedInStringForm);
+
+        sessionStorage.setItem(
+          "purchasedProducts",
+          productsPurchasedInStringForm,
+        );
+
+        
+      var reftocountlabel = document.getElementById("countLabel");
+      reftocountlabel.innerHTML = `Total Item Purchased : ${productsPurchased.length}`;
+
+      }
+
+      function checkout(){
+        if(productsPurchased.length > 0){ //check the length of productspurched
+          window.location.href = "billing.html";
+        }else{
+            alert("Purchase something !!");
+        }
+      }
+      GetProducts();
+    </script>
+  </body>
+</html>

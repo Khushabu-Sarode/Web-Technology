@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <title>Billing</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <script src="bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+           <img src="OIP.webp" alt="" class="img-fluid " style="height: 70px; width: 70px;">
+      <hr/>
+      <a href="home.html"> Home</a> | <a href="dashboard.html">Dashboard</a> | <a href="about.html">About Us</a>
+ 
+      </div>
+       <div class="row" id="productContainerDiv">
+          <div class="table-responsive">
+             <table class="table table-bordered">
+                <thead>
+                    <th>No</th>
+                    <th>Item Code</th>
+                    <th>Tittle</th>
+                    <th>Price</th>
+                </thead>
+
+                 <tbody id="productsInCart">
+                  
+                 </tbody>
+
+             </table>
+          </div>
+          <div class="alert alert-primary">
+             <h1 id="labelTotal">  </h1>
+             <button onclick="pay()" class="btn btn-primary" >Pay</button>
+          </div>
+       </div>
+
+
+       <script>
+      var isLoggedIn = sessionStorage.getItem("isLoggedIn")
+      if(isLoggedIn == null || isLoggedIn == "false"){
+        window.location.href = "login.html";
+      }else{
+        var useName = sessionStorage.getItem("userName");
+        var refTouseranamelabel = document.getElementById("labelusername");
+        refTouseranamelabel.innerHTML = `Welcome ${username}`;
+      }
+      function logout(){
+        sessionStorage.removeItem("isLoggedIn");
+        sessionStorage.removeItem("userName");
+        window.location.href = "login.html";
+      }
+    </script>
+
+       <script>
+        function pay(){
+            alert("Thankyou for payment !");
+            sessionStorage.removeItem("purchasedProducts");
+            window.location.href = "dashboard.html";
+        }
+       </script>
+
+
+       <script>
+         debugger;
+        var purchasedProducts = sessionStorage.getItem("purchasedProducts");
+        if(purchasedProducts == null){
+            window.location.href = "dashboard.html";
+        }else{
+           var reftoproductsincart = document.getElementById("productsInCart");
+           var purchasedProductsinarr = JSON.parse(purchasedProducts);
+           var totalAmount = 0;
+           for(i=0;i<purchasedProductsinarr.length;i++){
+            var product = purchasedProductsinarr[i];
+
+              var productrow = ` <tr>
+                        <td> ${i+1}</td>
+                        <td>${product.id}</td>
+                        <td>${product.title}</td>
+                        <td>${product.price}</td>
+                    </tr>`;
+
+            reftoproductsincart.innerHTML = reftoproductsincart.innerHTML + productrow;
+            totalAmount = totalAmount + product.price;
+             }
+     
+     
+             var reftolabelTotal = document.getElementById("labelTotal");
+             reftolabelTotal.innerText = "Total Amount = " + totalAmount + "INR";
+     
+            }
+       </script>
+    
+</body>
+</html>

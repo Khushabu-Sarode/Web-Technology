@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <title>Billing</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <script src="bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+           <img src="OIP.webp" alt="" class="img-fluid " style="height: 70px; width: 70px;">
+      <hr/>
+      <a href="home.html"> Home</a> | <a href="dashboard.html">Dashboard</a> | <a href="about.html">About Us</a>
+ 
+      <div class="row" id="ContainerDiv">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <td>UserName</td>
+                     <td><input type="text" id="txtUserName"  /></td>
+                
+                </tr>
+                 <tr>
+                    <td>Password</td>
+                     <td><input type="password" id="txtPassword"  /></td>
+                
+                </tr>
+                <tr>
+                    <td colspan="2"><button class="btn btn-primary" onclick="login()">Login</button></td>
+                </tr>
+                <tbody>
+                
+                
+            </table>
+            
+        </div>
+      </div>
+      </div>
+
+      <script>
+      function login() {
+        var userName = document.getElementById("txtUserName");
+        var password = document.getElementById("txtPassword");
+        if (userName.value == "khushi" && password.value == "khushi111") {
+          sessionStorage.setItem("isLoggedIn", true);
+          sessionStorage.setItem("userName", userName.value);
+          window.location.href = "dashboard.html";
+        } else {
+          alert("Invalid Credentials");
+        }
+      }
+    </script>
+    
+</body>
+</html>
