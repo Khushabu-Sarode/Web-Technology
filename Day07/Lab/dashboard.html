@@ -54,7 +54,7 @@
             );
 
             for (i = 0; i < products.length; i++) {
-              var product = products[i];
+              var product = products[i]; // now product contain single product from all products
 
               var productUI = `<div id="${product.id}" class="col-md-4">
           <img
@@ -74,11 +74,13 @@
        
         </div>`;
 
+           
               refToProductContainerDiv.innerHTML =
                 refToProductContainerDiv.innerHTML + productUI;
             }
           }
         };
+
         helper.open("GET", "https://dummyjson.com/products");
         helper.send();
       }
