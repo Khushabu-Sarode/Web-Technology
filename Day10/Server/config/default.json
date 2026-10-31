@@ -1,0 +1,13 @@
+{
+    "connectionDetails": {
+        "host": "localhost",
+        "port": 3306,
+        "database": "DemoDB",
+        "user": "root",
+        "password": "manager"
+    },
+    "applicationPort": 9999,
+    "jwt": {
+        "secretKey": "wpt_is_best_.net_is_best_9922412058_mahesh.panhale@gmail.com"
+    }
+}
